@@ -29,3 +29,59 @@ function operations(arr, operation) {
 }
 operations([1, 2, 3, 5], "sum");
 operations([50, 10, 2, 3], "mult");
+// 3 - instance of
+class User {
+    constructor(name) {
+        this.name = name;
+    }
+}
+class SuperUser extends User {
+    constructor(name) {
+        super(name);
+    }
+}
+const jhon = new User("Jhon");
+const paul = new SuperUser("Paul");
+console.log(jhon);
+console.log(paul);
+function userGreeting(user) {
+    if (user instanceof SuperUser) {
+        console.log(`Olá ${user.name}, deseja ver os dados do sistema?`);
+    }
+    else if (user instanceof User) {
+        console.log(`Olá ${user.name}`);
+    }
+}
+userGreeting(jhon);
+userGreeting(paul);
+// 4 - Operador in
+class Dog {
+    constructor(name, breed) {
+        this.name = name;
+        if (breed) {
+            this.breed = breed;
+        }
+    }
+}
+const turca = new Dog("Turca");
+const bob = new Dog("Bob", "Pastor Alemão");
+function showDogDetails(dog) {
+    if ("breed" in dog) {
+        console.log(`O cachorro é da raça ${dog.breed}`);
+    }
+    else {
+        console.log("O cachorro é viralata");
+    }
+}
+showDogDetails(turca);
+showDogDetails(bob);
+function userAnalysis(name, review) {
+    if (typeof review === "boolean") {
+        console.log(`O usuário ${name} não deixou sua avaliação.`);
+    }
+    else {
+        console.log(`O usuário ${name} avaliou com ${review}⭐ estrelas`);
+    }
+}
+userAnalysis("Ana", false);
+userAnalysis("Murilo", 5);

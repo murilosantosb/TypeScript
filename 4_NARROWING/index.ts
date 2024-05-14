@@ -29,3 +29,78 @@ function operations(arr: number[], operation?: string | undefined){
 
 operations([1,2,3,5], "sum")
 operations([50,10,2,3], "mult")
+
+// 3 - instance of
+class User {
+    name 
+
+    constructor(name: string) {
+        this.name = name
+    }
+}
+
+class SuperUser extends User {
+    constructor(name : string){
+        super(name)
+    }
+}
+
+const jhon = new User("Jhon")
+const paul = new SuperUser("Paul")
+
+console.log(jhon)
+console.log(paul)
+
+function userGreeting(user: object) {
+    if(user instanceof SuperUser) {
+        console.log(`Olá ${user.name}, deseja ver os dados do sistema?`)
+    }else if(user instanceof User) {
+        console.log(`Olá ${user.name}`)
+    }
+}
+
+userGreeting(jhon)
+userGreeting(paul)
+
+// 4 - Operador in
+class Dog {
+    name
+    breed
+
+    constructor(name: string, breed?: string) {
+        this.name = name
+        if(breed){
+            this.breed = breed
+        }
+    }
+}
+
+const turca = new Dog("Turca")
+const bob = new Dog("Bob", "Pastor Alemão")
+
+function showDogDetails(dog: Dog) {
+
+    if("breed" in dog) {
+        console.log(`O cachorro é da raça ${dog.breed}`)
+    }else{
+        console.log("O cachorro é viralata")
+    }
+}
+
+showDogDetails(turca)
+showDogDetails(bob)
+
+// 5 - Desafio
+type Review = number | boolean
+
+function userAnalysis(name: string, review: Review) {
+
+    if(typeof review === "boolean"){
+        console.log(`O usuário ${name} não deixou sua avaliação.`)
+    }else {
+        console.log(`O usuário ${name} avaliou com ${review}⭐ estrelas`)
+    }
+}
+
+userAnalysis("Ana", false)
+userAnalysis("Murilo", 5)
