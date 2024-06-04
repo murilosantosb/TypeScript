@@ -126,3 +126,55 @@ console.log(myArray)
 type fiveNumbers = [number, number, number, string, number]
 
 const myNumberArray: fiveNumbers = [1,2,3,"4",5]
+console.log(myNumberArray)
+
+type nameAndAge = [string, number]
+
+const anotherUser: nameAndAge = ["Murilo", 17]
+
+console.log(anotherUser[0])
+
+anotherUser[0] = "Bob"
+
+console.log(anotherUser[0])
+
+// 9 - Tuplas com readonly
+function showNumbers(numbers: readonly [number, number]) {
+    // numbers[0] = 10
+    console.log(numbers[0])
+    console.log(numbers[1])
+}
+
+showNumbers([15,18])
+
+// Desafios
+// 1 
+
+function convertingObjectToPairs(obj: Record<string , any>): [string, any][]{
+    return Object.entries(obj)
+}
+
+const axampleObject = { a:1, b:2, c:3 }
+const pairs = convertingObjectToPairs(axampleObject)
+console.log(pairs)
+
+// 2 
+function stringInversion(word: string){
+    let wordSplit = word.split("")
+
+    let wordReverse = wordSplit.reverse()
+
+    let joinWord = wordReverse.join()
+
+    console.log(joinWord)
+}
+
+stringInversion("Hello")
+
+// 3 
+function reduceArray(numbers: number[]){
+    let some = numbers.reduce((ant,pos) => ant + pos)
+    console.log(some)
+}
+
+reduceArray([15,20,30,40,50,60,70])
