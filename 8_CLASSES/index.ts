@@ -276,3 +276,116 @@ pObj.showPrivateMethod()
 //         this.privateMethod()
 //     }
 // }
+
+// 14 - Static Members
+class StaticMembers {
+   static prop = "Teste static"
+
+   static staticMethod() {
+    console.log("Este é um método estático")
+   }
+}
+
+console.log(StaticMembers.prop)
+StaticMembers.staticMethod()
+
+// 15 - Generic class
+class Item<T, U> {
+    first
+    second
+
+    constructor(first: T, second: U) {
+        this.first = first
+        this.second = second
+    }
+
+    get showFirst() {
+        return `O first é: ${this.first}`
+    }
+}
+
+const newItem = new Item("Caixa", "Surpresa")
+
+console.log(newItem)
+console.log(newItem.showFirst)
+console.log(typeof newItem.first)
+
+const secondItem = new Item(12, true)
+
+console.log(secondItem)
+
+// 16 - Parameter properties
+class ParameterProperties {
+    constructor(public name: string, private qty: number, private price: number) {
+        this.name = name
+        this.qty = qty
+        this.price = price
+    }
+
+    get showQty() {
+        return `Qtd total: ${this.qty}`
+    }
+
+    get showPrice() {
+        return `Preço total: ${this.price}`
+    }
+}
+
+const newShirt = new ParameterProperties("Camisa", 5, 19.99)
+
+console.log(newShirt.name)
+console.log(newShirt.showQty)
+console.log(newShirt.showPrice)
+
+// 17 - Class expressions
+const myClass = class<T> {
+    name
+
+    constructor(name: T) {
+        this.name = name
+    }
+}
+
+const person = new myClass("Murilo")
+
+console.log(person)
+
+// 18 - Abstract class
+
+abstract class AbstractClass {
+    abstract showName(): void;
+}
+
+// const newObj = new AbstractClass()
+
+class AbstractExample extends AbstractClass {
+    name
+
+    constructor(name: string) {
+        super()
+        this.name = name
+    }
+
+    showName(): void {
+        console.log(`O nome é ${this.name}`)
+    }
+}
+
+
+const newAbstractObjetc = new AbstractExample("Murilo")
+
+console.log(newAbstractObjetc)
+newAbstractObjetc.showName()
+
+// 19 - Relações entre classes
+class Dog {
+    name!: string
+}
+
+class Cat {
+    name!: string
+}
+
+const doguinho: Dog = new Cat()
+
+console.log(doguinho)
