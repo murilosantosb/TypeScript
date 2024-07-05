@@ -199,3 +199,104 @@ console.log(newBook)
 console.log(pen)
 
 console.log(newBook.createdAt)
+
+// 8 - Exemplo real method decorator
+function checkIfUserPosted() {
+
+    return function(target: Object, key: string | Symbol, descriptor: PropertyDescriptor) {
+        const childFunction = descriptor.value
+        // console.log(childFunction)
+        descriptor.value = function(...args: any[]) {
+            if(args[1] === true) {
+                console.log("Usuário já postou!")
+            }else {
+                return childFunction.apply(this, args)
+            }
+        }
+        return descriptor
+    }
+}
+
+class Post{
+    alreadyPosted = false
+
+    @checkIfUserPosted()
+    post(content: string, alreadyPosted: boolean) {
+        this.alreadyPosted = true
+        console.log(`Post do usuário : ${content}`)
+    }
+}
+
+const newPost = new Post()
+
+newPost.post("Meu primeiro post!", newPost.alreadyPosted)
+newPost.post("Meu segundo post!", newPost.alreadyPosted)
+
+// 9 - Exemplo real property decorator
+function Max(limit: number) {
+
+    return function(target: Object, propertKey: string) {
+
+        let value: string
+
+        const getter = function(){
+            return value
+        }
+
+        const setter = function(newVal: string) {
+            if(newVal.length > limit) {
+                console.log(`O valor deve ter no máximo ${limit} dígitos`)
+                return
+            }else {
+                value = newVal
+            }
+        }
+
+        Object.defineProperty(target, propertKey, {
+            get: getter,
+            set: setter
+        })
+    }
+}
+
+class Admin {
+    @Max(10)
+    username
+
+    constructor(username: string) {
+        this.username = username
+    }
+}
+
+const pedro = new Admin("pedro1235555")
+
+// 10 - Desafio 01
+function logExecutionTime() {
+    return function(target: any, propertKey: string, descriptor: PropertyDescriptor){
+        const originalMethod = descriptor.value
+
+        descriptor.value = function(...args: any[]) {
+            console.log(`Executando o método: ${propertKey}`)
+            console.time(`Tempo de execução: ${propertKey}`)
+
+            const result = originalMethod.apply(this, args)
+
+            console.timeEnd(`Tempo de execução: ${propertKey}`)
+            console.log(`Método executando: ${propertKey}`)
+
+            return result
+        }
+
+        return descriptor
+    }
+}
+
+class ExampleClass {
+    @logExecutionTime()
+    exampleMethod(){
+        console.log("Método em execução...")
+    }
+}
+
+const example = new ExampleClass()
+example.exampleMethod()

@@ -156,3 +156,90 @@ const pen = new Pen(55);
 console.log(newBook);
 console.log(pen);
 console.log(newBook.createdAt);
+// 8 - Exemplo real method decorator
+function checkIfUserPosted() {
+    return function (target, key, descriptor) {
+        const childFunction = descriptor.value;
+        // console.log(childFunction)
+        descriptor.value = function (...args) {
+            if (args[1] === true) {
+                console.log("Usuário já postou!");
+            }
+            else {
+                return childFunction.apply(this, args);
+            }
+        };
+        return descriptor;
+    };
+}
+class Post {
+    constructor() {
+        this.alreadyPosted = false;
+    }
+    post(content, alreadyPosted) {
+        this.alreadyPosted = true;
+        console.log(`Post do usuário : ${content}`);
+    }
+}
+__decorate([
+    checkIfUserPosted()
+], Post.prototype, "post", null);
+const newPost = new Post();
+newPost.post("Meu primeiro post!", newPost.alreadyPosted);
+newPost.post("Meu segundo post!", newPost.alreadyPosted);
+// 9 - Exemplo real property decorator
+function Max(limit) {
+    return function (target, propertKey) {
+        let value;
+        const getter = function () {
+            return value;
+        };
+        const setter = function (newVal) {
+            if (newVal.length > limit) {
+                console.log(`O valor deve ter no máximo ${limit} dígitos`);
+                return;
+            }
+            else {
+                value = newVal;
+            }
+        };
+        Object.defineProperty(target, propertKey, {
+            get: getter,
+            set: setter
+        });
+    };
+}
+class Admin {
+    constructor(username) {
+        this.username = username;
+    }
+}
+__decorate([
+    Max(10)
+], Admin.prototype, "username", void 0);
+const pedro = new Admin("pedro1235555");
+// 10 - Desafio 01
+function logExecutionTime() {
+    return function (target, propertKey, descriptor) {
+        const originalMethod = descriptor.value;
+        descriptor.value = function (...args) {
+            console.log(`Executando o método: ${propertKey}`);
+            console.time(`Tempo de execução: ${propertKey}`);
+            const result = originalMethod.apply(this, args);
+            console.timeEnd(`Tempo de execução: ${propertKey}`);
+            console.log(`Método executando: ${propertKey}`);
+            return result;
+        };
+        return descriptor;
+    };
+}
+class ExampleClass {
+    exampleMethod() {
+        console.log("Método em execução...");
+    }
+}
+__decorate([
+    logExecutionTime()
+], ExampleClass.prototype, "exampleMethod", null);
+const example = new ExampleClass();
+example.exampleMethod();
