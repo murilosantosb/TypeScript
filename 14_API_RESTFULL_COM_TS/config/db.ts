@@ -1,5 +1,8 @@
 import mongoose from "mongoose"
 
+// Logger
+import Logger from "./logger"
+
 const dbUser = process.env.DB_USER
 const dbPassword = process.env.DB_PASS
 
@@ -8,9 +11,11 @@ const conn = async () => {
       const dbConn = await mongoose.connect(
         `mongodb+srv://${dbUser}:${dbPassword}@cluster0.c4t7bzt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
       )  
-      console.log("Conectou ao banco!")
+      Logger.info("Conectou ao banco!")
+      return dbConn
     } catch (error) {
-        console.log(error)
+        Logger.error(error)
+        process.exit(1)
     }
 }
 

@@ -1,0 +1,16 @@
+2024--7N--09 17:21:00:210 - [31merror[39m: [31mquerySrv ENOTFOUND _mongodb._tcp.cluster0.c4t7bzt.mmongodb.net[39m
+2024--7N--10 16:59:54:5954 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "5155115151515151" (type string) at path "_id" for model "Movie"[39m
+2024--7N--10 17:00:36:036 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "5155115151515151" (type string) at path "_id" for model "Movie"[39m
+2024--7N--10 17:09:06:96 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "668dcc02f3f9ddde06456450d" (type string) at path "_id" for model "Movie"[39m
+2024--7N--10 19:54:54:5454 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "668dd1ad99a174a73a19bc3dd" (type string) at path "_id" for model "Movie"[39m
+2024--7N--10 19:55:59:5559 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "668dd1ad99a174a73a19bc3dd" (type string) at path "_id" for model "Movie"[39m
+2024--7N--10 19:59:01:591 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "668dd1ad99a174a73a19bc3dd" (type string) at path "_id" for model "Movie"[39m
+2024--7N--10 19:59:16:5916 - [31merror[39m: [31mErro no sistema: Cast to ObjectId failed for value "668dd1ad99a174a73a19bc3dfff" (type string) at path "_id" for model "Movie"[39m
+2024--7N--10 20:47:29:4729 - [31merror[39m: [31mCast to ObjectId failed for value "{[39m
+[31m  title: 'Velozes e furiosos X',[39m
+[31m  rating: 10,[39m
+[31m  description: 'Filme Bom.',[39m
+[31m  director: 'Diretor X',[39m
+[31m  stars: [ 'Paul Walker', 'Vin Diesel', 'The Rock' ],[39m
+[31m  poster: 'https://br.web.img2.acsta.net/pictures/23/05/16/22/53/0156803.jpg'[39m
+[31m}" (type Object) at path "_id" for model "Movie"[39m
